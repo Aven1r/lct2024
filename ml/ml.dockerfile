@@ -1,4 +1,4 @@
-FROM python:3.11
+FROM python:3.11 AS base
 
 ENV PYTHONFAULTHANDLER=1 \
     PYTHONUNBUFFERED=1 \
@@ -13,6 +13,8 @@ WORKDIR /api
 
 COPY ./api/requirements.txt ./api/requirements.txt
 RUN pip install -r ./api/requirements.txt
+
+FROM base AS base_with_req
 
 COPY . .
 

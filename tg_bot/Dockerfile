@@ -1,4 +1,4 @@
-FROM python:3.10.12
+FROM python:3.10.12 AS base
 
 ENV PYTHONFAULTHANDLER=1 \
     PYTHONUNBUFFERED=1 \
@@ -13,6 +13,8 @@ WORKDIR /.
 
 COPY ./requirements.txt ./requirements.txt
 RUN  pip install -r requirements.txt
+
+FROM base AS base_with_req
 
 COPY . .
 
